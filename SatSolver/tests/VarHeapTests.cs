@@ -30,13 +30,13 @@ public class VarHeapTests
         {
             varHeap.scores[i] = i;
 
-            Assert.True(varHeap.add(i));
+            Assert.True(varHeap.Add(i));
             Assert.Equal(i+1, varHeap.size);
 
-            Assert.False(varHeap.add(i));
+            Assert.False(varHeap.Add(i));
             Assert.Equal(i+1, varHeap.size);
 
-            Assert.Equal(i, varHeap.peek());
+            Assert.Equal(i, varHeap.Peek());
         }
     }
 
@@ -49,16 +49,16 @@ public class VarHeapTests
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.False(varHeap.contains(i));
-            Assert.True(varHeap.add(i));
-            Assert.True(varHeap.contains(i));
+            Assert.False(varHeap.Contains(i));
+            Assert.True(varHeap.Add(i));
+            Assert.True(varHeap.Contains(i));
         }
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.True(varHeap.contains(i));
-            Assert.True(varHeap.remove(i));
-            Assert.False(varHeap.contains(i));
+            Assert.True(varHeap.Contains(i));
+            Assert.True(varHeap.Remove(i));
+            Assert.False(varHeap.Contains(i));
         }
     }
 
@@ -72,14 +72,14 @@ public class VarHeapTests
         for (int i = 0; i < 5; i++)
         {
             Assert.Equal(i, varHeap.size);
-            Assert.True(varHeap.add(i));
+            Assert.True(varHeap.Add(i));
             Assert.Equal(i+1, varHeap.size);
         }
 
         for (int i = 0; i < 5; i++)
         {
             Assert.Equal(5 - i, varHeap.size);
-            Assert.True(varHeap.remove(i));
+            Assert.True(varHeap.Remove(i));
             Assert.Equal(4 - i, varHeap.size);
         }
     }
@@ -91,18 +91,18 @@ public class VarHeapTests
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.False(varHeap.remove(i));
+            Assert.False(varHeap.Remove(i));
         }
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.True(varHeap.add(i));
+            Assert.True(varHeap.Add(i));
         }
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.True(varHeap.remove(i));
-            Assert.False(varHeap.remove(i));
+            Assert.True(varHeap.Remove(i));
+            Assert.False(varHeap.Remove(i));
         }
     }
 
@@ -116,16 +116,16 @@ public class VarHeapTests
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.True(varHeap.add(i));
+            Assert.True(varHeap.Add(i));
         }
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.Equal( 4-i, varHeap.peek());
-            varHeap.remove(varHeap.peek());
+            Assert.Equal( 4-i, varHeap.Peek());
+            varHeap.Remove(varHeap.Peek());
         }
 
-        Assert.Equal(-1, varHeap.peek());
+        Assert.Equal(-1, varHeap.Peek());
     }
 
     [Fact]
@@ -135,16 +135,16 @@ public class VarHeapTests
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.True(varHeap.add(i));
+            Assert.True(varHeap.Add(i));
         }
 
-        varHeap.clear();
+        varHeap.Clear();
 
         Assert.Equal(0, varHeap.size);
 
         for (int i = 0; i < 5; i++)
         {
-            Assert.False(varHeap.contains(i));
+            Assert.False(varHeap.Contains(i));
         }
     }
 

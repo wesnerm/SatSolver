@@ -2,54 +2,32 @@
 
 namespace CongruenceClosure;
 
-public class EqExp : Exp
+public class EqExp(Exp left, Exp right) : Exp
 {
-    internal Exp leftExpr;
-    internal Exp rightExpr;
+    public Exp Left => left;
 
-    internal EqExp(Exp left, Exp right)
-    {
-        if (left==null)
-            throw new System.ArgumentException("Expr left cannot be null");
-
-        if (right==null)
-            throw new System.ArgumentException("Expr right cannot be null");
-
-        this.leftExpr = left;
-        this.rightExpr = right;
-    }
-
-    public Exp left => leftExpr;
-
-    public Exp right => rightExpr;
+    public Exp Right => right;
 
     public override ExprKind Kind => ExprKind.EQ;
 
-    public override bool Equals(object? o)
+    public override bool Equals(object? obj)
     {
-        if (this == o)
-        {
-            return true;
-        }
-        if (o == null || this.GetType() != o.GetType())
-        {
+        if (obj is not EqExp other)
             return false;
-        }
-        EqExp eqExpr = (EqExp)o;
-        return (leftExpr.Equals(eqExpr.leftExpr) && rightExpr.Equals(eqExpr.rightExpr));
+        return left.Equals(other.Left) && right.Equals(other.Right);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(leftExpr, rightExpr);
+        return HashCode.Combine(left, right);
     }
 
-    protected internal override void prettyPrint(StringBuilder b, string indent)
+    protected internal override void PrettyPrint(StringBuilder b, string indent)
     {
         b.Append("(");
-        leftExpr.prettyPrint(b, "");
+        Left.PrettyPrint(b, "");
         b.Append(" = ");
-        rightExpr.prettyPrint(b, "");
+        Right.PrettyPrint(b, "");
         b.Append(")");
     }
 }

@@ -12,14 +12,14 @@ public abstract class Exp
         FAPP,
     }
 
-    protected internal abstract void prettyPrint(StringBuilder b, string indent);
+    protected internal abstract void PrettyPrint(StringBuilder b, string indent);
 
     public abstract ExprKind Kind { get; }
 
     public override string ToString()
     {
         StringBuilder b = new StringBuilder();
-        prettyPrint(b, "");
+        PrettyPrint(b, "");
         return b.ToString();
     }
 }

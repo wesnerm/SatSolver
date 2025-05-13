@@ -9,7 +9,7 @@ public class ExpParserTests
     {
         var exp = ExpParser.Parse(new StringReader("(x1=x2)"));
 
-        Assert.True(exp is [EqExp { left: VarExpr { Id: 1 }, right: VarExpr { Id: 2 } }]);
+        Assert.True(exp is [EqExp { Left: VarExp { Id: 1 }, Right: VarExp { Id: 2 } }]);
     }
 
     [Fact]
@@ -17,7 +17,7 @@ public class ExpParserTests
     {
         var exp = ExpParser.Parse(new StringReader("(x1!=x2)"));
 
-        Assert.True(exp is [NegExp { left: VarExpr { Id: 1 }, right: VarExpr { Id: 2 } }]);
+        Assert.True(exp is [NegExp { Left: VarExp { Id: 1 }, Right: VarExp { Id: 2 } }]);
     }
 
     [Fact]
@@ -25,8 +25,8 @@ public class ExpParserTests
     {
         var exp = ExpParser.Parse(new StringReader("(x1=x2),(x1!=x2)"));
 
-        Assert.True(exp is [EqExp { left: VarExpr { Id: 1 }, right: VarExpr { Id: 2 } },
-                            NegExp { left: VarExpr { Id: 1 }, right: VarExpr { Id: 2 } }]);
+        Assert.True(exp is [EqExp { Left: VarExp { Id: 1 }, Right: VarExp { Id: 2 } },
+                            NegExp { Left: VarExp { Id: 1 }, Right: VarExp { Id: 2 } }]);
     }
 
     [Fact]
@@ -37,10 +37,10 @@ public class ExpParserTests
         Assert.True(exp is [
             EqExp
         {
-            left: VarExpr,
-            right: FappExp
+            Left: VarExp,
+            Right: FappExp
             {
-                Exprs: [VarExpr { Id: 2 }]
+                Exprs: [VarExp { Id: 2 }]
             }
         }
          ]);
@@ -54,10 +54,10 @@ public class ExpParserTests
         Assert.True(exp is [
             EqExp
         {
-            left: VarExpr,
-            right: FappExp
+            Left: VarExp,
+            Right: FappExp
             {
-                Exprs: [FappExp { Exprs: [VarExpr { Id: 2 }] }]
+                Exprs: [FappExp { Exprs: [VarExp { Id: 2 }] }]
             }
         }
          ]);
@@ -72,9 +72,9 @@ public class ExpParserTests
         Assert.True(exp is [
             EqExp 
             { 
-                left: VarExpr,
-                right: FappExp { 
-                    Exprs: [ VarExpr { Id: 2 }, VarExpr { Id : 3 } ] 
+                Left: VarExp,
+                Right: FappExp { 
+                    Exprs: [ VarExp { Id: 2 }, VarExp { Id : 3 } ] 
                 }
             }
          ]);
@@ -100,6 +100,6 @@ public class ExpParserTests
     {
         var exp = ExpParser.Parse(new StringReader("(x1=x2) x3"), false);
 
-        Assert.True(exp is [EqExp { left: VarExpr { Id: 1 }, right: VarExpr { Id: 2 } }]);
+        Assert.True(exp is [EqExp { Left: VarExp { Id: 1 }, Right: VarExp { Id: 2 } }]);
     }
 }

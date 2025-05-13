@@ -1,6 +1,6 @@
 ﻿namespace SatSolver;
 
-public class ExprBaseASTListener : ExprASTListener
+public class ExpBaseASTListener : ExpASTListener
 {
 	public virtual void enterVAR(VarExp e)
 	{

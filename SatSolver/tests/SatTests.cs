@@ -73,12 +73,12 @@ public class SatTests
 
         //var sat = SatUtil.checkSAT(file);
 
-        Exp e = ExprUtils.parse(file);
-        Exp cnfExpr = ExprUtils.toTseitin(e);
-        var assignments = SatUtil.findSatisfyingAssignment(cnfExpr);
+        Exp e = ExpParser.Parse(file);
+        Exp cnfExpr = ExpUtils.toTseitin(e);
+        var assignments = SatUtil.FindSatisfyingAssignment(cnfExpr);
         Assert.NotNull(assignments);
 
-        var sat = SatUtil.evaluate(cnfExpr, assignments);
+        var sat = SatUtil.Evaluate(cnfExpr, assignments);
         Assert.True(sat);
     }
 
@@ -114,7 +114,7 @@ public class SatTests
     {
         string path = ResourceDir + @"\unsat\" + test;
         using TextReader file = File.OpenText(path);
-        var sat = SatUtil.checkSAT(file);
+        var sat = SatUtil.CheckSat(file);
         Assert.False(sat);
     }
 
@@ -135,12 +135,12 @@ public class SatTests
     {
         var file = new StringReader(text);
 
-        Exp e = ExprUtils.parse(file);
-        Exp cnfExpr = ExprUtils.toTseitin(e);
-        var assignments = SatUtil.findSatisfyingAssignment(cnfExpr);
+        Exp e = ExpParser.Parse(file);
+        Exp cnfExpr = ExpUtils.toTseitin(e);
+        var assignments = SatUtil.FindSatisfyingAssignment(cnfExpr);
         Assert.NotNull(assignments);
 
-        var sat = SatUtil.evaluate(cnfExpr, assignments);
+        var sat = SatUtil.Evaluate(cnfExpr, assignments);
         Assert.True(sat);
     }
 
@@ -150,7 +150,7 @@ public class SatTests
     public void BasicUnsat(string text)
     {
         var file = new StringReader(text);
-        var sat = SatUtil.checkSAT(file);
+        var sat = SatUtil.CheckSat(file);
         Assert.False(sat);
     }
 
@@ -161,8 +161,8 @@ public class SatTests
         string path = ResourceDir + @"\sat\satsmall.txt";
         using TextReader file = File.OpenText(path);
 
-        Exp e = ExprUtils.parse(file);
-        Exp cnfExpr = ExprUtils.toTseitin(e);
+        Exp e = ExpParser.Parse(file);
+        Exp cnfExpr = ExpUtils.toTseitin(e);
 
         var solve = SatSolve(6, e);
         // var solve = SatSolve(21, cnfExpr); 
@@ -173,14 +173,14 @@ public class SatTests
         }
 
         // All false, All false but x1, All true but x3
-        var assignments = SatUtil.findSatisfyingAssignment(cnfExpr);
+        var assignments = SatUtil.FindSatisfyingAssignment(cnfExpr);
         // var assignments = Enumerable.Range(1, 6).ToDictionary(x => (long)x, x => false);
         Assert.NotNull(assignments);
 
-        var sat = SatUtil.evaluate(e, assignments);
+        var sat = SatUtil.Evaluate(e, assignments);
         Assert.True(sat);
 
-        sat = SatUtil.evaluate(cnfExpr, assignments);
+        sat = SatUtil.Evaluate(cnfExpr, assignments);
         Assert.True(sat);
     }
 
@@ -209,7 +209,7 @@ public class SatTests
             dict = new Dictionary<long, bool>();
 
         if (vars == 0)
-            return SatUtil.evaluate(exp, dict) ? dict : null;
+            return SatUtil.Evaluate(exp, dict) ? dict : null;
 
         dict[vars] = true;
         var result = SatSolve(vars - 1, exp, dict);

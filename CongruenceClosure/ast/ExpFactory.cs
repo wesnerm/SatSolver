@@ -6,11 +6,11 @@ public class ExpFactory
 {
     private static readonly ConcurrentDictionary<Exp, Exp> cache = new ConcurrentDictionary<Exp, Exp>();
 
-    public static VarExpr mkVAR(long id)
+    public static VarExp mkVAR(long id)
     {
-        VarExpr v = new VarExpr(id);
+        VarExp v = new VarExp(id);
         cache.GetOrAdd(v, v);
-        return (VarExpr)cache[v];
+        return (VarExp)cache[v];
     }
 
     public static FappExp mkFAPP(long id, List<Exp> args)

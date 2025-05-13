@@ -2,22 +2,22 @@
 
 namespace SatSolver;
 
-public abstract partial class Exp
+public abstract record Exp
 {
 
-    protected internal abstract void prettyPrint(StringBuilder b, string indent);
+    protected internal abstract void PrettyPrint(StringBuilder b, string indent);
 
     public abstract ExprKind Kind { get; }
 
     public override string ToString()
     {
         StringBuilder b = new StringBuilder();
-        prettyPrint(b, "");
+        PrettyPrint(b, "");
         return b.ToString();
     }
 
 
-    public static Exp operator ~(Exp exp1) => exp1 is NegExp n ? n.Exp : ExpFactory.NEG(exp1);
+    public static Exp operator ~(Exp exp1) => exp1 is NegExp n ? n.Expr : ExpFactory.NEG(exp1);
     public static Exp operator &(Exp exp1, Exp exp2) => ExpFactory.AND(exp1, exp2);
     public static Exp operator |(Exp exp1, Exp exp2) => ExpFactory.OR(exp1, exp2);
     public static Exp operator ^(Exp exp1, Exp exp2) => ~ExpFactory.EQUIV(exp1, exp2);

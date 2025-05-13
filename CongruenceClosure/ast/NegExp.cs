@@ -2,48 +2,31 @@
 
 namespace CongruenceClosure;
 
-public class NegExp : Exp
+public class NegExp(Exp left, Exp right) : Exp
 {
-	internal Exp leftExpr;
-	internal Exp rightExpr;
+    public Exp Left => left;
 
-	internal NegExp(Exp left, Exp right)
-	{
-		if (left is null)
-			throw new System.ArgumentException("Expr left cannot be null");
+    public Exp Right => right;
 
-		if (right is null)
-			throw new System.ArgumentException("Expr right cannot be null");
+    public override ExprKind Kind => ExprKind.NEQ;
 
-		this.leftExpr = left;
-		this.rightExpr = right;
-	}
-
-        public virtual Exp left => leftExpr;
-
-        public virtual Exp right => rightExpr;
-
-
-        public override bool Equals(object? o)
-	{
-		if (this == o)
-			return true;
-		if (o == null || this.GetType() != o.GetType())
-			return false;
-		NegExp neqExpr = (NegExp) o;
-		return (leftExpr.Equals(neqExpr.leftExpr) && rightExpr.Equals(neqExpr.rightExpr));
-	}
-
-        public override int GetHashCode() => HashCode.Combine(leftExpr, rightExpr);
-
-        protected internal override void prettyPrint(StringBuilder b, string indent)
-	{
-		b.Append("(");
-		leftExpr.prettyPrint(b, "");
-		b.Append(" != ");
-		rightExpr.prettyPrint(b, "");
-		b.Append(")");
-	}
-
-        public override ExprKind Kind => ExprKind.NEQ;
+    public override bool Equals(object? obj)
+    {
+        if (this == obj) return true;
+        return obj is NegExp other && left.Equals(other.Left) && right.Equals(other.Right);
     }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(left, right);
+    }
+
+    protected internal override void PrettyPrint(StringBuilder b, string indent)
+    {
+        b.Append("(");
+        Left.PrettyPrint(b, "");
+        b.Append(" != ");
+        Right.PrettyPrint(b, "");
+        b.Append(")");
+    }
+}

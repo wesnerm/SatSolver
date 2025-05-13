@@ -1,6 +1,6 @@
 ﻿namespace SatSolver;
 
-public interface ExprASTListener
+public interface ExpASTListener
 {
 	void enterVAR(VarExp e);
 

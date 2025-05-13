@@ -17,14 +17,14 @@ public class VarHeap
         this.size = 0;
     }
 
-    public void clear()
+    public void Clear()
     {
         size = 0;
     }
 
-    public bool add(int n)
+    public bool Add(int n)
     {
-        if (contains(n))
+        if (Contains(n))
             return false;
 
         int i = size++;
@@ -44,7 +44,7 @@ public class VarHeap
         return true;
     }
 
-    public bool remove(int n)
+    public bool Remove(int n)
     {
         var index = indices[n];
         if (index < 0 || index >= size || list[index] != n)
@@ -79,13 +79,13 @@ public class VarHeap
         return true;
     }
 
-    public int peek()
+    public int Peek()
     {
         if (size <= 0) return -1;
         return list[0];
     }
 
-    public bool contains(int n)
+    public bool Contains(int n)
     {
         var index = indices[n];
         return index >= 0 && index < size && list[index] == n;

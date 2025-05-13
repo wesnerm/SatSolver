@@ -16,14 +16,14 @@ public class CCSolver
         foreach (var expr in exprs)
             if (expr is EqExp e1)
             {
-                var term1 = ToTerm(e1.left);
-                var term2 = ToTerm(e1.right);
+                var term1 = ToTerm(e1.Left);
+                var term2 = ToTerm(e1.Right);
                 Queue(term1, term2);
             }
             else if (expr is NegExp e2)
             {
-                _ = ToTerm(e2.left);
-                _ = ToTerm(e2.right);
+                _ = ToTerm(e2.Left);
+                _ = ToTerm(e2.Right);
             }
 
         while (unionQueue.Count > 0)
@@ -36,8 +36,8 @@ public class CCSolver
         foreach (var expr in exprs)
             if (expr is NegExp e)
             {
-                var term1 = ToTerm(e.left);
-                var term2 = ToTerm(e.right);
+                var term1 = ToTerm(e.Left);
+                var term2 = ToTerm(e.Right);
                 if (term1.find() == term2.find())
                     return false;
             }
@@ -56,7 +56,7 @@ public class CCSolver
             case FappExp e:
                 term = new Term(e.Id, e.Exprs.Select(ToTerm).ToArray());
                 break;
-            case VarExpr e:
+            case VarExp e:
                 term = new Term(e.Id);
                 break;
             default:

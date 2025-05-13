@@ -26,7 +26,7 @@ public class ExpParserTests
     {
         var exp = ExpParser.Parse(new StringReader("(not x1)"));
 
-        Assert.True(exp is NegExp { Exp: VarExp{ Id: 1 } });
+        Assert.True(exp is NegExp { Expr: VarExp{ Id: 1 } });
 
     }
 

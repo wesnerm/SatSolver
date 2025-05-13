@@ -1,7 +1,7 @@
 ﻿namespace SatSolver;
 using static ExpFactory;
 
-public class ExprBaseTransformASTListener : ExprBaseASTListener
+public class ExpBaseTransformASTListener : ExpBaseASTListener
 {
 	internal Dictionary<Exp, Exp> replMap = new();
 
@@ -17,7 +17,7 @@ public class ExprBaseTransformASTListener : ExprBaseASTListener
 
 	public override void exitNEG(NegExp e)
 	{
-		Exp inExpr = e.Exp;
+		Exp inExpr = e.Expr;
 		Exp newInExpr = newExp(inExpr);
 
 		if (newInExpr != inExpr)

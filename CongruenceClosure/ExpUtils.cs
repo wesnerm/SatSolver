@@ -10,11 +10,11 @@ public class ExpUtils
         {
             switch (e)
             {
-                case EqExp { left: Exp left, right: Exp right }:
+                case EqExp { Left: Exp left, Right: Exp right }:
                     Check(left);
                     Check(right);
                     break;
-                case NegExp { left: Exp left, right: Exp right }:
+                case NegExp { Left: Exp left, Right: Exp right }:
                     Check(left);
                     Check(right);
                     break;

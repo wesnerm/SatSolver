@@ -65,7 +65,7 @@ public class SatSolver
         //    }
         //}
 
-        int maxV = freeVariables.peek();
+        int maxV = freeVariables.Peek();
         double maxScore = scores[maxV];
 
         if (maxScore > 1e10)
@@ -276,7 +276,7 @@ public class SatSolver
         assignment.decisionLevel = decisionLevel;
         assignment.reason = clause;
         trail[trailLength++] = assignment;
-        freeVariables.remove(id);
+        freeVariables.Remove(id);
         return true;
     }
 
@@ -290,7 +290,7 @@ public class SatSolver
             assignment.value = 0;
             assignment.decisionLevel = -1;
             assignment.reason = null;
-            freeVariables.add(assignment.id);
+            freeVariables.Add(assignment.id);
             trail[trailLength - 1] = null;
         }
 
@@ -313,7 +313,7 @@ public class SatSolver
         {
             var v = i + 1;
             variables[v] = new Variable { id = v, originalId = ids[i], };
-            freeVariables.add(v);
+            freeVariables.Add(v);
         }
 
         var newAssignments = ids.Select((x, i) => new { x, i = i + 1 }).ToDictionary(x => x.x, x => x.i);
@@ -348,7 +348,7 @@ public class SatSolver
                     buildClause(orExp.Right);
                     return;
 
-                case NegExp { Exp: VarExp v }:
+                case NegExp { Expr: VarExp v }:
                     clause.Add(-v.Id);
                     return;
 
